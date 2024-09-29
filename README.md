@@ -19,12 +19,12 @@ There are 12 notes in a standard octave. C, D, E, F, G, A and B are the "natural
 What You Need to Do
 ======================
 
-Write the `init_state` function. This should seed the random number generator and
-Write the `process_state` function. This should take the current state (note), generate a random number as described below, and then transition to the next note.
-Finally, write the `print_state` function, which prints the properly formatted note.
+1. Write the `init_state` function. This should seed the random number generator and
+2. Write the `process_state` function. This should take the current state (note), generate a random number as described below, and then transition to the next note.
+3. Finally, write the `print_state` function, which prints the properly formatted note.
 
 
-The rules are:
+The FSM rules are:
 
 1. Each note (C,D,E,F,G) should have its own unique state.
 2. The initial state should should be that of the "C" note.
@@ -40,6 +40,18 @@ printf("Cn\n");
 
 If you want to listen to the music your program produces, there is a Python script that will play the song. You can use it by running `make listen` in the assignment directory.
 
+FSM Transitions
+==========
+| |To C|To D|To E|To F|To G|
+|-|-|-|-|-|-|
+|From C|10%|10%|30%|30%|20%|
+|From D|30%|10%|40%|20%|0%|
+|From E|30%|10%|20%|10%|30%|
+|From F|0%|40%|30%|30%|10%|
+|From G|30%|0%|40%|20%|10%|
+
+When your current state is C, there is a 10% chance your next state is C, 10% chance your next state is D, 30% E, 30% F, and 20% G.
+
 Random Number Generation
 ==========
 
@@ -48,14 +60,15 @@ Since this assignment uses pseudorandom number generation, in order to ensure co
 Random numbers should be generated using the standard `rand` function. This will generate a very large random number. Generate a random number, modulate by 100, and use that to evaluate the state transition, moving from left to right in the table.
 
 For example: Note X transitions as follows.
-Note|C  |D  |E  |F  |G
-X   |20%|10%|5% |35%|30%
+|Note|C  |D  |E  |F  |G
+|-|-|-|-|-|-|
+|X|20%|10%|5% |35%|30%
 
-If rand()%100 is between 0 and 19, the next note is C.
-If rand()%100 is between 20 and 29, the next note is D.
-If rand()%100 is between 30 and 34, the next note is E.
-If rand()%100 is between 35 and 69, the next note is F.
-If rand()%100 is between 70 and 99, the next note is G.
+* If rand()%100 is between 0 and 19, the next note is C.
+* If rand()%100 is between 20 and 29, the next note is D.
+* If rand()%100 is between 30 and 34, the next note is E.
+* If rand()%100 is between 35 and 69, the next note is F.
+* If rand()%100 is between 70 and 99, the next note is G.
 
 **Only generate the random number one time per `process_state`.** Generating it more than once per function call will make it generate different numbers.
 
