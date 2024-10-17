@@ -9,7 +9,7 @@
 #include "fsm_macros.h"
 
 
-void init_state() {
+void init_state(long seed) {
   //In this function you should seed the random number generator and initialize your FSM to its default state.
 
 }
@@ -20,5 +20,5 @@ void process_state() {
 }
 void print_state() {
   //In this process you should simply print the current state. An example for the 'C' state is already present.
-  
+  printf("Cn\n");
 }
