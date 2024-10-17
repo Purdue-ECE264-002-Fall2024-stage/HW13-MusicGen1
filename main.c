@@ -7,7 +7,7 @@
 #include "fsm_macros.h"
 
 // only 3 functions, no need to create .h file
-void init_state();
+void init_state(long seed);
 void process_state(); 
 void print_state();
 
